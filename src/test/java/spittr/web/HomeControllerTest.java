@@ -64,6 +64,14 @@ public class HomeControllerTest {
         .andExpect(model().attributeExists("spittle"))
                 .andExpect(model().attribute("spittle", expectedSpittle));
     }
+    @Test
+    public void shouldShowRegistration() throws Exception {
+        SpitterController controller = new SpitterController();
+        MockMvc mockMvc = standaloneSetup(controller).build();
+        mockMvc.perform(get("/spitter/register"))
+                .andExpect(view().name("registerForm"));
+    }
+
 
 
     private List<Spittle> createSpittleList(int count) {
