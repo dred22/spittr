@@ -6,7 +6,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.web.servlet.view.InternalResourceView;
-import spittr.Spittle;
+import spittr.data.models.Spittle;
 import spittr.data.SpittleRepository;
 
 import java.util.ArrayList;
@@ -64,15 +64,6 @@ public class HomeControllerTest {
         .andExpect(model().attributeExists("spittle"))
                 .andExpect(model().attribute("spittle", expectedSpittle));
     }
-    @Test
-    public void shouldShowRegistration() throws Exception {
-        SpitterController controller = new SpitterController();
-        MockMvc mockMvc = standaloneSetup(controller).build();
-        mockMvc.perform(get("/spitter/register"))
-                .andExpect(view().name("registerForm"));
-    }
-
-
 
     private List<Spittle> createSpittleList(int count) {
         List<Spittle> spittles = new ArrayList<Spittle>();

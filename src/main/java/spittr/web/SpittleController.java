@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import spittr.Spittle;
+import spittr.data.models.Spittle;
 import spittr.data.SpittleRepository;
 
 import java.util.List;
@@ -28,15 +28,9 @@ public class SpittleController {
     public List<Spittle> spittles(
             @RequestParam(value="max", defaultValue= "9223372036854775807L") long max,
             @RequestParam(value="count", defaultValue="20") int count) {
-        return spittleRepository.findSpittles(max, count);
+        List<Spittle> spittles = spittleRepository.findSpittles(max, count);
+        return spittles;
     }
-/*    @RequestMapping(value="/show", method=RequestMethod.GET)
-    public String showSpittle(
-            @RequestParam("spittle_id") long spittleId,
-            Model model) {
-        model.addAttribute(spittleRepository.findOne(spittleId));
-        return "spittle";
-    }*/
 
     @RequestMapping(value="/{spittleId}", method=RequestMethod.GET)
     public String spittle( @PathVariable("spittleId") long spittleId, Model model) {
