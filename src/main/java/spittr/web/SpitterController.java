@@ -2,10 +2,14 @@ package spittr.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import spittr.data.models.Spitter;
-import spittr.data.models.Spittle;
 import spittr.data.SpitterRepository;
+import spittr.data.models.Spitter;
+
+import javax.validation.Valid;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -26,9 +30,19 @@ public class SpitterController {
     }
 
     @RequestMapping(value = "/register", method = POST)
-    public String processRegistration(Spitter spitter) {
+    public String processRegistration(@Valid Spitter spitter, Errors errors) {
+        if (errors.hasErrors()) {
+            return "registerForm";
+        }
         Spitter savedSpitter = spitterRepository.save(spitter);
-        return "redirect:/spitter/" +
-                savedSpitter.getUsername();
+        return "redirect:/spitter/" + savedSpitter.getUsername();
+    }
+
+    @RequestMapping(value="/{username}", method=GET)
+    public String showSpitterProfile(
+            @PathVariable String username, Model model) {
+        Spitter spitter = spitterRepository.findByUsername(username);
+        model.addAttribute(spitter);
+        return "profile";
     }
 }

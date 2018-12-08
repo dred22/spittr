@@ -12,4 +12,9 @@ public class SpitterRepositoryImpl implements SpitterRepository {
     public Spitter save(Spitter spitter) {
         return spitter;
     }
+
+    @Override
+    public Spitter findByUsername(String username) {
+        return new Spitter(24L, "jbauer", "24hours", "Jack", "Bauer");
+    }
 }

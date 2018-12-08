@@ -33,7 +33,7 @@ public class Spitter {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-    public Spitter(@NotNull @Size(min = 5, max = 16) String username, @NotNull @Size(min = 5, max = 25) String password, @NotNull @Size(min = 2, max = 30) String firstName, @NotNull @Size(min = 2, max = 30) String lastName) {
+    public Spitter(String username, String password, String firstName, String lastName) {
         this(null, username, password, firstName, lastName);
     }
 
