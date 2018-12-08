@@ -79,7 +79,7 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <version>1.1.1</version>
                 <executions>
-                    <execution><!-- Run our version calculation script -->
+                    <execution>
                         <id>id.deploy</id>
                         <phase>install</phase>
                         <goals>
@@ -87,7 +87,7 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
+                <configuration><!-- Deploy our war into tomcat container -->
                     <executable>docker</executable>
                     <commandlineArgs>cp ./target/${project.build.finalName}.war mytomcat8:/usr/local/tomcat/webapps/ROOT.war
                     </commandlineArgs>
