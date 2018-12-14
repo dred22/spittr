@@ -6,8 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import spittr.data.SpitterRepository;
 import spittr.data.models.Spitter;
+import spittr.exeptions.SpitterNotFoundException;
+import spittr.services.SpitterRepository;
 
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 @RequestMapping("/spitter")
 public class SpitterController {
+
     private SpitterRepository spitterRepository;
 
     @Autowired
@@ -31,7 +33,7 @@ public class SpitterController {
     }
 
     @RequestMapping(value = "/register", method = POST)
-    public String processRegistration(@Valid Spitter spitter, Errors errors) {
+    public String processRegistration(@Valid Spitter spitter, /*@RequestPart(value="profilePicture", required=false) MultipartFile profilePicture,*/ Errors errors) {
         if (errors.hasErrors()) {
             return "registerForm";
         }
@@ -43,6 +45,9 @@ public class SpitterController {
     public String showSpitterProfile(
             @PathVariable String username, Model model) {
         Spitter spitter = spitterRepository.findByUsername(username);
+        if(spitter == null){
+            throw new SpitterNotFoundException();
+        }
         model.addAttribute(spitter);
         return "profile";
     }

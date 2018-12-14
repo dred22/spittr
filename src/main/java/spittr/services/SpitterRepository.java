@@ -1,4 +1,4 @@
-package spittr.data;
+package spittr.services;
 
 import spittr.data.models.Spitter;
 import spittr.data.models.Spittle;

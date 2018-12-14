@@ -1,4 +1,4 @@
-package spittr.data;
+package spittr.services;
 
 import java.util.List;
 

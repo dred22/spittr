@@ -22,9 +22,7 @@ public class Spitter {
     @NotNull
     @Size(min=2, max=30, message="{lastName.size}")
     private String lastName;
-
     @NotNull
-    @Size(min=1)
     @Email( message="{email.valid}")
     private String email;
 

@@ -1,8 +1,8 @@
-package spittr.data.impl;
+package spittr.services.impl;
 
 import org.springframework.stereotype.Repository;
 import spittr.data.models.Spittle;
-import spittr.data.SpittleRepository;
+import spittr.services.SpittleRepository;
 
 import java.util.List;
 
@@ -15,6 +15,8 @@ public class SpittleRepositoryImpl implements SpittleRepository {
 
     @Override
     public Spittle findOne(long i) {
+
+
         return null;
     }
 }

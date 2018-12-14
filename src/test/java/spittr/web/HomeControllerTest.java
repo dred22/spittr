@@ -7,7 +7,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.web.servlet.view.InternalResourceView;
 import spittr.data.models.Spittle;
-import spittr.data.SpittleRepository;
+import spittr.services.SpittleRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
