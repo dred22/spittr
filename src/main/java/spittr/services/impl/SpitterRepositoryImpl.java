@@ -19,14 +19,7 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 
     @Override
     public Spitter findByUsername(String username) {
-        Spitter oneByName = null;
-
-        try {
-            oneByName = spitterDao.findOneByUsername(username);
-        } catch (Exception e){
-            System.out.println("There is an exception " + e.getMessage());
-        }
-
+        Spitter oneByName = spitterDao.findOneByUsername(username);
         return oneByName;
     }
 }

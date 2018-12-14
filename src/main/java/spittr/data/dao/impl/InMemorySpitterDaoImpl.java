@@ -3,6 +3,7 @@ package spittr.data.dao.impl;
 import org.springframework.stereotype.Repository;
 import spittr.data.dao.SpitterDao;
 import spittr.data.models.Spitter;
+import spittr.exeptions.DuplicateSpittleException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,9 @@ public class InMemorySpitterDaoImpl implements SpitterDao {
 
     @Override
     public Spitter create(Spitter obj) {
+        if (findOneByUsername(obj.getUsername()) != null){
+            throw new DuplicateSpittleException();
+        }
         obj.setId((long) spitters.size());
         spitters.add(obj);
         return obj;
@@ -31,9 +35,15 @@ public class InMemorySpitterDaoImpl implements SpitterDao {
 
     @Override
     public Spitter findOneByUsername(String username) {
-        Spitter spitterByName = spitters.stream()
-                .filter(spitter -> spitter.getUsername().equals(username))
-                .findFirst().get();
+        Spitter spitterByName = null;
+        try {
+            spitterByName = spitters.stream()
+                    .filter(spitter -> spitter.getUsername().equals(username))
+                    .findFirst().get();
+        } catch (Exception e){
+            System.out.println("There is an exception " + e.getMessage());
+        }
+
         return spitterByName;
     }
 
