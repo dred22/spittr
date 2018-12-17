@@ -53,9 +53,4 @@ public class SpitterController {
         model.addAttribute(spitter);
         return "profile";
     }
-
-    @ExceptionHandler(DuplicateSpittleException.class)
-    public String handleDuplicateSpittle() {
-        return "error/duplicate";
-    }
 }
