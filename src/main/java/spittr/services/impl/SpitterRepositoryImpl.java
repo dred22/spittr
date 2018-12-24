@@ -2,7 +2,6 @@ package spittr.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 import spittr.data.dao.SpitterDao;
 import spittr.data.models.Spitter;
@@ -13,7 +12,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
-@PropertySource("classpath:app.properties")
 public class SpitterRepositoryImpl implements SpitterRepository {
 
     @Autowired
