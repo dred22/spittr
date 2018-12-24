@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import spittr.data.models.Spitter;
-import spittr.exeptions.DuplicateSpittleException;
 import spittr.exeptions.SpitterNotFoundException;
 import spittr.services.SpitterRepository;
 
@@ -35,12 +33,19 @@ public class SpitterController {
     }
 
     @RequestMapping(value = "/register", method = POST)
-    public String processRegistration(@Valid Spitter spitter, /*@RequestPart(value="profilePicture", required=false) MultipartFile profilePicture,*/ Errors errors) {
+    public String processRegistration(@Valid Spitter spitter, /*@RequestPart(value="profilePicture", required=false) MultipartFile profilePicture,*/ Errors errors, Model model) {
         if (errors.hasErrors()) {
             return "registerForm";
         }
+        Spitter spitter1 = new Spitter();
+        spitter1.setFirstName("Magomed");
+        spitter1.setLastName("Kadiev");
+        Object[] test = {1,"test",2,1, spitter1};
         Spitter savedSpitter = spitterRepository.save(spitter);
-        return "redirect:/spitter/" + savedSpitter.getUsername();
+        model.addAttribute("username", spitter.getUsername());
+        model.addAttribute("spitterId", test);
+        /*model.addAttribute("myarray", test);*/
+        return "redirect:/spitter/{username}";
     }
 
     @RequestMapping(value="/{username}", method=GET)

@@ -1,16 +1,28 @@
 package spittr.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 import spittr.data.dao.SpitterDao;
 import spittr.data.models.Spitter;
 import spittr.services.SpitterRepository;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Repository
+@PropertySource("classpath:app.properties")
 public class SpitterRepositoryImpl implements SpitterRepository {
 
     @Autowired
     private SpitterDao spitterDao;
+
+    @Value("${defaultUsers}")
+    private String defaultUsers;
+
+    private Map<String, String> mapUserAndPassword;
 
     @Override
     public Spitter save(Spitter spitter) {
@@ -19,7 +31,27 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 
     @Override
     public Spitter findByUsername(String username) {
+        Spitter defaultSpitter = getDefault(username);
+        if(defaultSpitter != null){
+            return defaultSpitter;
+        }
         Spitter oneByName = spitterDao.findOneByUsername(username);
         return oneByName;
+    }
+
+    private Spitter getDefault(String username){
+        if (mapUserAndPassword == null){
+            String[] split = defaultUsers.split(",");
+            mapUserAndPassword = Arrays.stream(split)
+                    .collect(Collectors.toMap(x -> x.split(":")[0], x -> x.split(":")[1]));
+        }
+
+        Spitter spitter = null;
+        if( mapUserAndPassword.get(username) != null){
+            spitter = new Spitter();
+            spitter.setUsername(username);
+            spitter.setPassword(mapUserAndPassword.get(username));
+        }
+        return spitter;
     }
 }
