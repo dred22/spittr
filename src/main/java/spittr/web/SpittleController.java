@@ -29,8 +29,8 @@ public class SpittleController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Spittle> spittles(
-            @RequestParam(value="max", defaultValue= "9223372036854775807L", required = false) long max,
-            @RequestParam(value="count", defaultValue="20", required = false) int count) {
+            @RequestParam(value="max", defaultValue= "9223372036854775807") long max,
+            @RequestParam(value="count", defaultValue="20") int count) {
         List<Spittle> spittles = spittleRepository.findSpittles(max, count);
         if(CollectionUtils.isEmpty(spittles)){
             throw new SpittlesNotFoundException();
