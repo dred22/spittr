@@ -48,11 +48,8 @@ public class SecurityConfig
             throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .formLogin().and()
-                .httpBasic()
-                .and().logout()
-                .permitAll();
+                .and().formLogin();
     }
 }
