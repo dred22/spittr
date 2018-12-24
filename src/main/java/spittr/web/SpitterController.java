@@ -6,11 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import spittr.data.models.Spitter;
 import spittr.exeptions.SpitterNotFoundException;
 import spittr.services.SpitterRepository;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -56,6 +58,15 @@ public class SpitterController {
             throw new SpitterNotFoundException();
         }
         model.addAttribute(spitter);
+        return "profile";
+    }
+
+
+    @RequestMapping(value="/me", method= RequestMethod.GET)
+    public String whoAmI( Model model, Principal principal) {
+
+        String username = principal.getName();
+        model.addAttribute(spitterRepository.findByUsername(username));
         return "profile";
     }
 }
