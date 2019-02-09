@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 public class Spitter {
     private Long id;
@@ -26,8 +27,15 @@ public class Spitter {
     @Email( message="{email.valid}")
     private String email;
 
+    private Date ts;
+
     public Spitter(){
 
+    }
+
+    public Spitter(String username, Date ts){
+        this.username = username;
+        this.ts = ts;
     }
 
     public Spitter(Long id, String username, String password, String firstName, String lastName) {
@@ -37,10 +45,10 @@ public class Spitter {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
     public Spitter(String username, String password, String firstName, String lastName) {
         this(null, username, password, firstName, lastName);
     }
-
     public Long getId() {
         return id;
     }
@@ -83,6 +91,14 @@ public class Spitter {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public Date getTs() {
+        return ts;
+    }
+
+    public void setTs(Date ts) {
+        this.ts = ts;
     }
 
     public void setLastName(String lastName) {

@@ -3,22 +3,26 @@ package spittr.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import spittr.data.models.Spitter;
 import spittr.exeptions.SpitterNotFoundException;
+import spittr.exeptions.SpittleNotFoundException;
+import spittr.exeptions.SpittlesNotFoundException;
 import spittr.services.SpitterRepository;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-@RequestMapping("/spitter")
 public class SpitterController {
 
     private SpitterRepository spitterRepository;
@@ -28,13 +32,13 @@ public class SpitterController {
         this.spitterRepository = spitterRepository;
     }
 
-    @RequestMapping(value = "/register", method = GET)
+    @RequestMapping(value = "/spitter/register", method = GET)
     public String showRegistrationForm(Model model) {
         model.addAttribute(new Spitter());
         return "registerForm";
     }
 
-    @RequestMapping(value = "/register", method = POST)
+    @RequestMapping(value = "/spitter/register", method = POST)
     public String processRegistration(@Valid Spitter spitter, /*@RequestPart(value="profilePicture", required=false) MultipartFile profilePicture,*/ Errors errors, Model model) {
         if (errors.hasErrors()) {
             return "registerForm";
@@ -50,7 +54,7 @@ public class SpitterController {
         return "redirect:/spitter/{username}";
     }
 
-    @RequestMapping(value="/{username}", method=GET)
+    @RequestMapping(value="/spitter/{username}", method=GET)
     public String showSpitterProfile(
             @PathVariable String username, Model model) {
         Spitter spitter = spitterRepository.findByUsername(username);
@@ -62,11 +66,36 @@ public class SpitterController {
     }
 
 
-    @RequestMapping(value="/me", method= RequestMethod.GET)
+    @RequestMapping(value="/spitter/me", method= RequestMethod.GET)
     public String whoAmI( Model model, Principal principal) {
 
         String username = principal.getName();
         model.addAttribute(spitterRepository.findByUsername(username));
         return "profile";
+    }
+
+
+
+    @RequestMapping(value="/spitters", method = RequestMethod.GET)
+    public List<Spitter> spittles(Model model,
+            @RequestParam(value="max", defaultValue= "9223372036854775807") long max,
+            @RequestParam(value="count", defaultValue="20") int count) {
+        List<Spitter> spitters = spitterRepository.findSpitters(max, count);
+        if(CollectionUtils.isEmpty(spitters)){
+            throw new SpittlesNotFoundException();
+        }
+        //when instead of view name a value is returned, Spring looks for a view with the same name,
+        // and if it's a case the model data value name will be composed of his type(s), in this case, it'll be 'spitterList'
+        return spitters;
+    }
+
+    @RequestMapping(value="/spitters/{spittleId}", method=RequestMethod.GET)
+    public String spittle( @PathVariable("spittleId") long spittleId, Model model) {
+        Spitter spittle = spitterRepository.findOne(spittleId);
+        if (spittle == null) {
+            throw new SpittleNotFoundException();
+        }
+        model.addAttribute(spittle);
+        return "spittle";
     }
 }

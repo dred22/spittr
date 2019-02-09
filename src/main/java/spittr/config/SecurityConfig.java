@@ -48,7 +48,7 @@ public class SecurityConfig
             throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/spitters").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin();
     }

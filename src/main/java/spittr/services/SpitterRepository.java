@@ -1,11 +1,16 @@
 package spittr.services;
 
 import spittr.data.models.Spitter;
-import spittr.data.models.Spittle;
+
+import java.util.List;
 
 public interface SpitterRepository {
 
     Spitter save(Spitter spitter);
 
     Spitter findByUsername(String username);
+
+    List<Spitter> findSpitters(long max, int count);
+
+    Spitter findOne(long i);
 }

@@ -8,6 +8,8 @@ import spittr.data.models.Spitter;
 import spittr.services.SpitterRepository;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -51,5 +53,16 @@ public class SpitterRepositoryImpl implements SpitterRepository {
             spitter.setPassword(mapUserAndPassword.get(username));
         }
         return spitter;
+    }
+    @Override
+    public List<Spitter> findSpitters(long max, int count) {
+        return Arrays.asList(new Spitter("Maga", new Date()), new Spitter("Istre", new Date()));
+    }
+
+    @Override
+    public Spitter findOne(long i) {
+
+
+        return null;
     }
 }
