@@ -3,7 +3,7 @@
 <c:forEach items="${spitterList}" var="spitter" >
     <li id="spitter_<c:out value="spitter.id"/>">
         <div class="spitterMessage">
-            <c:out value="${spitter.message}" />
+            <c:out value="${spitter.username}" />
         </div>
         <div>
             <span class="spitterTime"><c:out value="${spitter.ts}" /></span>

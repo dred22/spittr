@@ -1,5 +1,6 @@
 package spittr.data.dao.impl;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import spittr.data.dao.SpitterDao;
 import spittr.data.models.Spitter;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Profile("!hibernate")
 public class InMemorySpitterDaoImpl implements SpitterDao {
 
     private List<Spitter> spitters = new ArrayList<>();
