@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
+import spittr.common.SpitterProfiles;
 import spittr.data.dao.SpitterDao;
 import spittr.data.models.Spitter;
 import spittr.exeptions.DuplicateSpittleException;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-@Profile("hibernate")
+@Profile(SpitterProfiles.HIBERNATE)
 public class HibernateSpitterDaoImpl
         implements SpitterDao {
 
