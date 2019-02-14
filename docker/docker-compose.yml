@@ -2,8 +2,11 @@ version: '2'
 
 services:
 
-  databases:
-    image: postgres:9.6
+  database:
+    #image: postgres:9.6
+    build:
+      context: .
+      dockerfile: ./database/Dockerfile
     container_name: mydb
     ports:
       - "5432:5432"
@@ -21,7 +24,7 @@ services:
     environment:
     - JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n"
     depends_on:
-      - databases
+      - database
     ports:
       - "8080:8080"
       - "5005:5005"
