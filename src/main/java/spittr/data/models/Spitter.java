@@ -113,4 +113,16 @@ public class Spitter {
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this, "id", "username", "password", "firstName", "lastName");
     }
+
+    @Override
+    public String toString() {
+        return "Spitter{" +
+               "id=" + id +
+               ", username='" + username + '\'' +
+               ", firstName='" + firstName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", email='" + email + '\'' +
+               ", ts=" + ts +
+               '}';
+    }
 }

@@ -16,22 +16,22 @@ public class InMemorySpitterDaoImpl implements SpitterDao {
     private List<Spitter> spitters = new ArrayList<>();
 
     @Override
-    public Spitter create(Spitter obj) {
-        if (findOneByUsername(obj.getUsername()) != null){
+    public Spitter create(Spitter spitter) {
+        if (findOneByUsername(spitter.getUsername()) != null){
             throw new DuplicateSpittleException();
         }
-        obj.setId((long) spitters.size());
-        spitters.add(obj);
-        return obj;
+        spitter.setId((long) spitters.size());
+        spitters.add(spitter);
+        return spitter;
     }
 
     @Override
-    public boolean delete(Spitter obj) {
+    public boolean delete(Spitter spitter) {
         return false;
     }
 
     @Override
-    public int update(Spitter obj) {
+    public int update(Spitter spitter) {
         return 0;
     }
 

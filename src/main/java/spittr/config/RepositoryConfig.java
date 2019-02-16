@@ -49,7 +49,7 @@ public class RepositoryConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(getDataSource());
-        sessionFactory.setPackagesToScan(new String[] { "com.websystique.spring.model" });
+        sessionFactory.setPackagesToScan(new String[] { "spittr.data.models" });
         sessionFactory.setHibernateProperties(getHibernateProperties());
         return sessionFactory;
     }

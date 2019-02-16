@@ -2,11 +2,11 @@ package spittr.data.dao;
 
 public interface GenericDao<T> {
 		
-	  public abstract T create(T obj);
+	  public abstract T create(T spitter);
 
-	  public abstract boolean delete(T obj);
+	  public abstract boolean delete(T spitter);
 
-	  public abstract int update(T obj);
+	  public abstract int update(T spitter);
 
 	  public abstract T findOneByUsername(String username);
 	  
