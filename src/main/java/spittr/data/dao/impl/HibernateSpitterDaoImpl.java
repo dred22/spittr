@@ -59,6 +59,13 @@ public class HibernateSpitterDaoImpl
 
     @Override
     public Spitter findById(Long id) {
-        return null;
+        log.debug("#### SPITTERDAO FINDBYID ####");
+        log.debug("getting hib spitter by id {}", id);
+        HibernateSpitter hibSpitter = (HibernateSpitter) sessionFactory.getCurrentSession().get(HibernateSpitter.class, id);
+        log.debug("got HibernateSpitter {}", hibSpitter);
+
+        Spitter spitterFound = modelMapper.map(hibSpitter, Spitter.class);
+        log.debug("hibSpitter is converted to spitter {}", spitterFound);
+        return spitterFound;
     }
 }

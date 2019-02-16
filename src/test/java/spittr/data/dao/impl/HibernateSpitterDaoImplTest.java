@@ -25,19 +25,16 @@ public class HibernateSpitterDaoImplTest {
     private SpitterDao spitterDao;
 
     @Test
-    public void findOneByUsername() {
-        Spitter test = spitterDao.findOneByUsername("test");
-        System.out.println(test);
-
-    }
-    @Test
-    public void create() {
+    public void create_and_find_by_id() {
         Spitter spitter = new Spitter("Dres", new Date());
         Spitter spitterSaved = spitterDao.create(spitter);
         Assert.assertNotNull(spitterSaved);
-        Assert.assertNotNull(spitterSaved.getId());
-        //System.out.println(spitterDao.create(spitter));
+        Long savedId = spitterSaved.getId();
+        Assert.assertNotNull(savedId);
 
+        Spitter spitterDres = spitterDao.findById(savedId);
+        Assert.assertNotNull(spitterDres);
+        Assert.assertNotNull(spitterDres.getId());
     }
 
 }
