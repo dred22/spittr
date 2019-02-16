@@ -7,33 +7,33 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Spitter {
     private Long id;
     @NotNull
-    @Size(min=5, max=16, message="{username.size}")
+    @Size(min = 5, max = 16, message = "{username.size}")
     private String username;
     @NotNull
-    @Size(min=5, max=25, message="{password.size}")
+    @Size(min = 5, max = 25, message = "{password.size}")
     private String password;
     @NotNull
-    @Size(min=2, max=30, message="{firstName.size}")
+    @Size(min = 2, max = 30, message = "{firstName.size}")
     private String firstName;
     @NotNull
-    @Size(min=2, max=30, message="{lastName.size}")
+    @Size(min = 2, max = 30, message = "{lastName.size}")
     private String lastName;
     @NotNull
-    @Email( message="{email.valid}")
+    @Email(message = "{email.valid}")
     private String email;
 
-    private Date ts;
+    private LocalDate ts;
 
-    public Spitter(){
+    public Spitter() {
 
     }
 
-    public Spitter(String username, Date ts){
+    public Spitter(String username, LocalDate ts) {
         this.username = username;
         this.ts = ts;
     }
@@ -49,6 +49,7 @@ public class Spitter {
     public Spitter(String username, String password, String firstName, String lastName) {
         this(null, username, password, firstName, lastName);
     }
+
     public Long getId() {
         return id;
     }
@@ -77,6 +78,10 @@ public class Spitter {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -85,30 +90,27 @@ public class Spitter {
         this.email = email;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public Date getTs() {
-        return ts;
-    }
-
-    public void setTs(Date ts) {
-        this.ts = ts;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    public LocalDate getTs() {
+        return ts;
+    }
+
+    public void setTs(LocalDate ts) {
+        this.ts = ts;
+    }
+
     @Override
     public boolean equals(Object that) {
         return EqualsBuilder.reflectionEquals(this, that, "id", "username", "password", "firstName", "lastName");
     }
+
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this, "id", "username", "password", "firstName", "lastName");

@@ -9,13 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Table(name="SPITTERS")
+@Table(name = "SPITTERS")
 public class HibernateSpitter {
 
     @Id
@@ -32,7 +29,7 @@ public class HibernateSpitter {
 
     private String email;
 
-    private Date ts;
+    private LocalDate ts;
 
 
     public Long getId() {
@@ -63,6 +60,10 @@ public class HibernateSpitter {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -71,30 +72,27 @@ public class HibernateSpitter {
         this.email = email;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public Date getTs() {
-        return ts;
-    }
-
-    public void setTs(Date ts) {
-        this.ts = ts;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    public LocalDate getTs() {
+        return ts;
+    }
+
+    public void setTs(LocalDate ts) {
+        this.ts = ts;
+    }
+
     @Override
     public boolean equals(Object that) {
         return EqualsBuilder.reflectionEquals(this, that, "id", "username", "password", "firstName", "lastName");
     }
+
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this, "id", "username", "password", "firstName", "lastName");

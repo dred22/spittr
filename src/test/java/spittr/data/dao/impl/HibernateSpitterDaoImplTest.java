@@ -13,7 +13,7 @@ import spittr.data.dao.SpitterDao;
 import spittr.data.models.Spitter;
 
 import javax.transaction.Transactional;
-import java.util.Date;
+import java.time.LocalDate;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {RootConfig.class})
@@ -26,7 +26,7 @@ public class HibernateSpitterDaoImplTest {
 
     @Test
     public void create_and_find_by_id() {
-        Spitter spitter = new Spitter("Dres", new Date());
+        Spitter spitter = new Spitter("Dres", LocalDate.now());
         Spitter spitterSaved = spitterDao.create(spitter);
         Assert.assertNotNull(spitterSaved);
         Long savedId = spitterSaved.getId();
