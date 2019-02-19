@@ -2,6 +2,7 @@ package spittr.data.dao.impl;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
+import spittr.common.SpitterProfiles;
 import spittr.data.dao.SpitterDao;
 import spittr.data.models.Spitter;
 import spittr.exeptions.DuplicateSpittleException;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-@Profile("!hibernate")
+@Profile(SpitterProfiles.NOT_HIBERNATE)
 public class InMemorySpitterDaoImpl implements SpitterDao {
 
     private List<Spitter> spitters = new ArrayList<>();
