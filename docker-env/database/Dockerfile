@@ -16,3 +16,5 @@ ENV PGDATA="/var/lib/postgresql/data/pgdata"
 
 # This script creates the DBs and update postgres configuration.
 ADD database/resources/postgres-configuration.sh /docker-entrypoint-initdb.d/00-linxo-postgres-configuration.sh
+
+ADD database/resources/test_data.sql /docker-entrypoint-initdb.d/01-test_data.sql
