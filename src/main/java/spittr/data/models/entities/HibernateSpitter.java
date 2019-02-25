@@ -3,7 +3,9 @@ package spittr.data.models.entities;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import spittr.common.LocalDateAttributeConverter;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +31,7 @@ public class HibernateSpitter {
 
     private String email;
 
+    @Convert(converter = LocalDateAttributeConverter.class)
     private LocalDate ts;
 
 
