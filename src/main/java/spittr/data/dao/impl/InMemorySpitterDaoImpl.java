@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-@Profile(SpitterProfiles.NOT_HIBERNATE)
+@Profile(SpitterProfiles.IN_MEMORY)
 public class InMemorySpitterDaoImpl implements SpitterDao {
 
     private List<Spitter> spitters = new ArrayList<>();
