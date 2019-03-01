@@ -13,4 +13,7 @@
         <a href="<c:url value="/spitters" />">Spitters</a> |
         <a href="<c:url value="/spitter/register" />">Register</a>
     </body>
+    <footer>
+      <p>The profile is <strong>${profiles[0]}<strong></p>
+    </footer>
 </html>
