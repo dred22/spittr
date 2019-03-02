@@ -4,7 +4,7 @@ import spittr.data.models.Spitter;
 
 import java.util.List;
 
-public interface SpitterRepository {
+public interface SpitterService {
 
     Spitter save(Spitter spitter);
 

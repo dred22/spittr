@@ -13,7 +13,7 @@ import spittr.data.models.Spitter;
 import spittr.exeptions.SpitterNotFoundException;
 import spittr.exeptions.SpittleNotFoundException;
 import spittr.exeptions.SpittlesNotFoundException;
-import spittr.services.SpitterRepository;
+import spittr.services.SpitterService;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -25,10 +25,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 public class SpitterController {
 
-    private SpitterRepository spitterRepository;
+    private SpitterService spitterRepository;
 
     @Autowired
-    public SpitterController(SpitterRepository spitterRepository) {
+    SpitterController(SpitterService spitterRepository) {
         this.spitterRepository = spitterRepository;
     }
 
@@ -46,7 +46,7 @@ public class SpitterController {
         Spitter spitter1 = new Spitter();
         spitter1.setFirstName("Magomed");
         spitter1.setLastName("Kadiev");
-        Object[] test = {1,"test",2,1, spitter1};
+        Object[] test = {1, "test", 2, 1, spitter1};
         Spitter savedSpitter = spitterRepository.save(spitter);
         model.addAttribute("username", spitter.getUsername());
         model.addAttribute("spitterId", test);
@@ -54,11 +54,11 @@ public class SpitterController {
         return "redirect:/spitter/{username}";
     }
 
-    @RequestMapping(value="/spitter/{username}", method=GET)
+    @RequestMapping(value = "/spitter/{username}", method = GET)
     public String showSpitterProfile(
             @PathVariable String username, Model model) {
         Spitter spitter = spitterRepository.findByUsername(username);
-        if(spitter == null){
+        if (spitter == null) {
             throw new SpitterNotFoundException();
         }
         model.addAttribute(spitter);
@@ -66,8 +66,8 @@ public class SpitterController {
     }
 
 
-    @RequestMapping(value="/spitter/me", method= RequestMethod.GET)
-    public String whoAmI( Model model, Principal principal) {
+    @RequestMapping(value = "/spitter/me", method = RequestMethod.GET)
+    public String whoAmI(Model model, Principal principal) {
 
         String username = principal.getName();
         model.addAttribute(spitterRepository.findByUsername(username));
@@ -75,13 +75,12 @@ public class SpitterController {
     }
 
 
-
-    @RequestMapping(value="/spitters", method = RequestMethod.GET)
+    @RequestMapping(value = "/spitters", method = RequestMethod.GET)
     public List<Spitter> spittles(Model model,
-            @RequestParam(value="max", defaultValue= "9223372036854775807") long max,
-            @RequestParam(value="count", defaultValue="20") int count) {
+                                  @RequestParam(value = "max", defaultValue = "9223372036854775807") long max,
+                                  @RequestParam(value = "count", defaultValue = "20") int count) {
         List<Spitter> spitters = spitterRepository.findSpitters(max, count);
-        if(CollectionUtils.isEmpty(spitters)){
+        if (CollectionUtils.isEmpty(spitters)) {
             throw new SpittlesNotFoundException();
         }
         //when instead of view name a value is returned, Spring looks for a view with the same name,
@@ -89,8 +88,8 @@ public class SpitterController {
         return spitters;
     }
 
-    @RequestMapping(value="/spitters/{spittleId}", method=RequestMethod.GET)
-    public String spittle( @PathVariable("spittleId") long spittleId, Model model) {
+    @RequestMapping(value = "/spitters/{spittleId}", method = RequestMethod.GET)
+    public String spittle(@PathVariable("spittleId") long spittleId, Model model) {
         Spitter spittle = spitterRepository.findOne(spittleId);
         if (spittle == null) {
             throw new SpittleNotFoundException();

@@ -11,7 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import spittr.data.models.Spitter;
-import spittr.services.SpitterRepository;
+import spittr.services.SpitterService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class SecurityConfig
         extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private SpitterRepository spitterRepository;
+    private SpitterService spitterRepository;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
@@ -31,7 +31,7 @@ public class SecurityConfig
                 .userDetailsService((username) -> {
                     Spitter spitter = spitterRepository.findByUsername(username);
                     if (spitter != null) {
-                        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+                        List<GrantedAuthority> authorities = new ArrayList<>();
                         authorities.add(new SimpleGrantedAuthority("ROLE_SPITTER"));
 
                         return new User(

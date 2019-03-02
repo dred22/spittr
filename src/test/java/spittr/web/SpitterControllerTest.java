@@ -1,11 +1,11 @@
 package spittr.web;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.springframework.test.web.servlet.MockMvc;
 import spittr.data.models.Spitter;
-import spittr.services.SpitterRepository;
+import spittr.services.SpitterService;
 
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -15,28 +15,30 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 public class SpitterControllerTest {
 
     @Test
-    public void shouldProcessRegistration() throws Exception {
-        SpitterRepository mockRepository = mock(SpitterRepository.class);
+    public void shouldProcessRegistration()
+            throws Exception {
+        SpitterService mockRepository = Mockito.mock(SpitterService.class);
         Spitter unsaved = new Spitter("jbauer", "24hours", "Jack", "Bauer");
-        Spitter saved =   new Spitter(24L, "jbauer", "24hours", "Jack", "Bauer");
+        Spitter saved = new Spitter(24L, "jbauer", "24hours", "Jack", "Bauer");
 
-        when(mockRepository.save(unsaved)).thenReturn(saved);
+        Mockito.when(mockRepository.save(unsaved)).thenReturn(saved);
 
         SpitterController controller = new SpitterController(mockRepository);
         MockMvc mockMvc = standaloneSetup(controller).build();
 
         mockMvc.perform(post("/spitter/register")
-                        .param("firstName", "Jack")
-                        .param("lastName", "Bauer")
-                        .param("username", "jbauer")
-                        .param("password", "24hours"))
+                                .param("firstName", "Jack")
+                                .param("lastName", "Bauer")
+                                .param("username", "jbauer")
+                                .param("password", "24hours"))
                 .andExpect(redirectedUrl("/spitter/jbauer"));
-        verify(mockRepository, atLeastOnce()).save(unsaved);
+        Mockito.verify(mockRepository, Mockito.atLeastOnce()).save(unsaved);
 
     }
 
     @Test
-    public void shouldShowRegistration() throws Exception {
+    public void shouldShowRegistration()
+            throws Exception {
         SpitterController controller = new SpitterController(null);
         MockMvc mockMvc = standaloneSetup(controller).build();
         mockMvc.perform(get("/spitter/register"))

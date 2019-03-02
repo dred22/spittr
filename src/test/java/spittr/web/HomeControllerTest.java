@@ -1,6 +1,7 @@
 package spittr.web;
 
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -12,7 +13,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 public class HomeControllerTest {
     @Test
-    public void testHomePage() throws Exception {
+    @Ignore
+    public void testHomePage()
+            throws Exception {
         HomeController controller = new HomeController();
         MockMvc mockMvc = standaloneSetup(controller).build();
         MockHttpServletRequestBuilder getResult = get("/");

@@ -9,3 +9,8 @@ docker run --name mytomcat8 -p 8080:8080 -p 5005:5005 -e "JAVA_OPTS=\"-agentlib:
 TU RUN
 from docker directory
 docker-compose up -d
+
+CONTENT
+- Hibernate Jpa 2 implementation with no persistence xml
+- docker app and database containers
+- spring 4 mvc and security
