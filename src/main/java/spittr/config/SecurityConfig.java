@@ -6,41 +6,44 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import spittr.data.models.Spitter;
-import spittr.services.SpitterService;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebMvcSecurity
 public class SecurityConfig
         extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private SpitterService spitterRepository;
+/*    @Autowired
+    private SpitterService spitterRepository;*/
 
+    @Autowired
+    DataSource dataSource;
+
+    /* in memory authentication
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth)
+            throws Exception {
+        auth.userDetailsService((username) -> {
+            Spitter spitter = spitterRepository.findByUsername(username);
+            if (spitter != null) {
+                List<GrantedAuthority> authorities = new ArrayList<>();
+                authorities.add(new SimpleGrantedAuthority("ROLE_SPITTER"));
+
+                return new User(
+                        spitter.getUsername(),
+                        spitter.getPassword(),
+                        authorities);
+            }
+            throw new UsernameNotFoundException("User '" + username + "' not found.");
+        });
+    }*/
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth
-                .userDetailsService((username) -> {
-                    Spitter spitter = spitterRepository.findByUsername(username);
-                    if (spitter != null) {
-                        List<GrantedAuthority> authorities = new ArrayList<>();
-                        authorities.add(new SimpleGrantedAuthority("ROLE_SPITTER"));
-
-                        return new User(
-                                spitter.getUsername(),
-                                spitter.getPassword(),
-                                authorities);
-                    }
-                    throw new UsernameNotFoundException("User '" + username + "' not found.");
-                });
+                .jdbcAuthentication()
+                .dataSource(dataSource);
     }
 
     @Override

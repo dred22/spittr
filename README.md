@@ -12,5 +12,6 @@ docker-compose up -d
 
 CONTENT
 - Hibernate Jpa 2 implementation with no persistence xml
+  - Criteria API select example
 - docker app and database containers
 - spring 4 mvc and security
