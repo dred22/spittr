@@ -17,6 +17,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @Profile(SpitterProfiles.HIBERNATE)
@@ -81,5 +83,17 @@ public class HibernateSpitterDaoImpl
         Spitter spitterFound = modelMapper.map(hibSpitter, Spitter.class);
         log.debug("hibSpitter is converted to spitter {}", spitterFound);
         return spitterFound;
+    }
+
+    @Override
+    public List<Spitter> findAll() {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<HibernateSpitter> criteriaQuery = builder.createQuery(HibernateSpitter.class);
+        Root<HibernateSpitter> c = criteriaQuery.from(HibernateSpitter.class);
+        criteriaQuery.select(c);
+        List<HibernateSpitter> resultList = entityManager.createQuery(criteriaQuery).getResultList();
+        return resultList.stream()
+                .map(s -> modelMapper.map(s, Spitter.class))
+                .collect(Collectors.toList());
     }
 }

@@ -8,7 +8,6 @@ import spittr.data.dao.SpitterDao;
 import spittr.data.models.Spitter;
 import spittr.services.SpitterService;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +59,8 @@ public class SpitterServiceImpl
 
     @Override
     public List<Spitter> findSpitters(long max, int count) {
-        return Arrays.asList(new Spitter("Maga", LocalDate.now()), new Spitter("Istre", LocalDate.now()));
+        //return Arrays.asList(new Spitter("Maga", LocalDate.now()), new Spitter("Istre", LocalDate.now()));
+        return spitterDao.findAll();
     }
 
     @Override

@@ -33,7 +33,13 @@ CREATE TABLE spitters
 
 
 BEGIN;
-insert into SPITTERS (email, firstName, lastName, password, ts, username) values ('test@test.com', 'test1_firstName', 'test1_lastName', 'pass', '2019-01-25', 'test1');
+
+insert into SPITTERS
+  (email, firstName, lastName, password, ts, username)
+values
+  ('test1@test.com', 'test1_firstName', 'test1_lastName', 'pass1', '2019-01-25', 'test1'),
+  ('test2@test.com', 'test2_firstName', 'test2_lastName', 'pass2', '2019-01-25', 'test2'),
+  ('test3@test.com', 'test3_firstName', 'test3_lastName', 'pass3', '2019-01-25', 'test3');
 
 insert into users (username, password) values ('user','user');
 insert into authorities (username, authority) values ('user','ROLE_USER');

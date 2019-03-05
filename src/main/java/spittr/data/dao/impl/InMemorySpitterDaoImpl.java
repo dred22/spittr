@@ -12,13 +12,14 @@ import java.util.List;
 
 @Repository
 @Profile(SpitterProfiles.IN_MEMORY)
-public class InMemorySpitterDaoImpl implements SpitterDao {
+public class InMemorySpitterDaoImpl
+        implements SpitterDao {
 
     private List<Spitter> spitters = new ArrayList<>();
 
     @Override
     public Spitter create(Spitter spitter) {
-        if (findOneByUsername(spitter.getUsername()) != null){
+        if (findOneByUsername(spitter.getUsername()) != null) {
             throw new DuplicateSpittleException();
         }
         spitter.setId((long) spitters.size());
@@ -43,7 +44,8 @@ public class InMemorySpitterDaoImpl implements SpitterDao {
             spitterByName = spitters.stream()
                     .filter(spitter -> spitter.getUsername().equals(username))
                     .findFirst().get();
-        } catch (Exception e){
+        }
+        catch (Exception e) {
             System.out.println("There is an exception " + e.getMessage());
         }
 
@@ -52,6 +54,11 @@ public class InMemorySpitterDaoImpl implements SpitterDao {
 
     @Override
     public Spitter findById(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<Spitter> findAll() {
         return null;
     }
 }

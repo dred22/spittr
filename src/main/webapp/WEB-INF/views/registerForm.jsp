@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
 <html>
     <head>
@@ -20,6 +21,7 @@
     </head>
 <body>
     <h1>Register</h1>
+    <h2>Hello <security:authentication property="principal.username" />!</h2>
     <!-- enctype="multipart/form-data" -->
     <sf:form method="POST" commandName="spitter" >
     <sf:errors path="*" element="div" cssClass="errors" />
