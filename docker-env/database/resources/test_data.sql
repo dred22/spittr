@@ -4,6 +4,7 @@
 drop table if exists spitters ;
 drop table if exists users ;
 
+BEGIN;
 CREATE TABLE users
   (
      username  VARCHAR(30) NOT NULL,
@@ -32,7 +33,6 @@ CREATE TABLE spitters
 
 
 
-BEGIN;
 
 insert into SPITTERS
   (email, firstName, lastName, password, ts, username)
