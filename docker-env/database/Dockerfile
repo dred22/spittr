@@ -13,6 +13,7 @@ RUN apt-get -y update \
 # password of the $POSTGRES_USER, which is postgres by default.
 ENV POSTGRES_PASSWORD="postgres"
 ENV PGDATA="/var/lib/postgresql/data/pgdata"
+ENV DB_NAME="handbook"
 
 # This script creates the DBs and update postgres configuration.
 ADD database/resources/postgres-configuration.sh /docker-entrypoint-initdb.d/00-linxo-postgres-configuration.sh

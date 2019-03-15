@@ -22,7 +22,7 @@ public class RepositoryConfig {
     //${jdbc.driverClassName}
     @Value("${jdbc.driverClassName}")
     private String driverClassName;
-    @Value("${jdbc.url:jdbc:postgresql://localhost/my_spitter}")
+    @Value("${jdbc.url}")
     private String url;
     @Value("${jdbc.username}")
     private String username;

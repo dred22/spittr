@@ -1,11 +1,15 @@
 package spittr.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -14,11 +18,10 @@ import javax.sql.DataSource;
 public class SecurityConfig
         extends WebSecurityConfigurerAdapter {
 
-/*    @Autowired
-    private SpitterService spitterRepository;*/
-
     @Autowired
     DataSource dataSource;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     /* in memory authentication
     @Override
@@ -38,12 +41,19 @@ public class SecurityConfig
             throw new UsernameNotFoundException("User '" + username + "' not found.");
         });
     }*/
-    @Override
+/*    @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth
                 .jdbcAuthentication()
-                .dataSource(dataSource);
+                .dataSource(dataSource).passwordEncoder(passwordEncoder());
+    }*/
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth)
+            throws Exception {
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
+
     }
 
     @Override
@@ -54,5 +64,11 @@ public class SecurityConfig
                 .antMatchers("/", "/spitters").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder;
     }
 }

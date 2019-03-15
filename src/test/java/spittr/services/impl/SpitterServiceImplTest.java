@@ -39,7 +39,7 @@ public class SpitterServiceImplTest {
     public void findByUsername() {
         Spitter spitterAdmin = repository.findByUsername("test1");
         assertNotNull(spitterAdmin);
-        assertEquals("pass", spitterAdmin.getPassword());
+        assertEquals("pass1", spitterAdmin.getPassword());
     }
 
     @Test
