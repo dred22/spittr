@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import spittr.common.SpitterProfiles;
 import spittr.config.RootConfig;
 import spittr.data.dao.SpitterDao;
-import spittr.data.models.Spitter;
+import spittr.data.models.Reference;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -28,13 +28,13 @@ public class HibernateSpitterDaoImplTest {
 
     @Test
     public void create_and_find_by_id() {
-        Spitter spitter = new Spitter("Dres", LocalDate.now());
-        Spitter spitterSaved = spitterDao.create(spitter);
+        Reference spitter = new Reference("Dres", LocalDate.now());
+        Reference spitterSaved = spitterDao.create(spitter);
         Assert.assertNotNull(spitterSaved);
         Long savedId = spitterSaved.getId();
         Assert.assertNotNull(savedId);
 
-        Spitter spitterDres = spitterDao.findById(savedId);
+        Reference spitterDres = spitterDao.findById(savedId);
         Assert.assertNotNull(spitterDres);
         Assert.assertNotNull(spitterDres.getId());
     }

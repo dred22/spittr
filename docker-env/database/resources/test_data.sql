@@ -1,7 +1,7 @@
 
 \c handbook
 
-drop table if exists spitters ;
+drop table if exists reference ;
 drop table if exists users ;
 
 BEGIN;
@@ -15,7 +15,7 @@ CREATE TABLE users
      PRIMARY KEY (username)
   ) ;
 
-CREATE TABLE spitters
+CREATE TABLE reference
   (
      id        BIGSERIAL NOT NULL,
      email     VARCHAR(255),
@@ -24,11 +24,12 @@ CREATE TABLE spitters
      password  VARCHAR(255),
      ts        DATE,
      username  VARCHAR(255),
+     deleted   BOOLEAN DEFAULT FALSE,
      PRIMARY KEY (id)
   ) ;
 
 
-insert into SPITTERS
+insert into reference
   (email, firstName, lastName, password, ts, username)
 values
   ('test1@test.com', 'test1_firstName', 'test1_lastName', 'pass1', '2019-01-25', 'test1'),

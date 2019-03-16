@@ -3,8 +3,8 @@ package spittr.web;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.test.web.servlet.MockMvc;
-import spittr.data.models.Spitter;
-import spittr.services.SpitterService;
+import spittr.data.models.Reference;
+import spittr.services.ReferencesService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -12,14 +12,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
-public class SpitterControllerTest {
+public class SpitterControllerUnitTest {
 
     @Test
     public void shouldProcessRegistration()
             throws Exception {
-        SpitterService mockRepository = Mockito.mock(SpitterService.class);
-        Spitter unsaved = new Spitter("jbauer", "24hours", "Jack", "Bauer");
-        Spitter saved = new Spitter(24L, "jbauer", "24hours", "Jack", "Bauer");
+        ReferencesService mockRepository = Mockito.mock(ReferencesService.class);
+        Reference unsaved = new Reference("jbauer", "24hours", "Jack", "Bauer");
+        Reference saved = new Reference(24L, "jbauer", "24hours", "Jack", "Bauer");
 
         Mockito.when(mockRepository.save(unsaved)).thenReturn(saved);
 

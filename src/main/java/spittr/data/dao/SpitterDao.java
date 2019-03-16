@@ -1,6 +1,6 @@
 package spittr.data.dao;
 
-import spittr.data.models.Spitter;
+import spittr.data.models.Reference;
 
-public interface SpitterDao extends GenericDao<Spitter> {
+public interface SpitterDao extends GenericDao<Reference> {
 }

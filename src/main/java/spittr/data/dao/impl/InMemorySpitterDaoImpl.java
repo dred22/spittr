@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import spittr.common.SpitterProfiles;
 import spittr.data.dao.SpitterDao;
-import spittr.data.models.Spitter;
-import spittr.exeptions.DuplicateSpittleException;
+import spittr.data.models.Reference;
+import spittr.exeptions.DuplicateReferenceException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +15,12 @@ import java.util.List;
 public class InMemorySpitterDaoImpl
         implements SpitterDao {
 
-    private List<Spitter> spitters = new ArrayList<>();
+    private List<Reference> spitters = new ArrayList<>();
 
     @Override
-    public Spitter create(Spitter spitter) {
+    public Reference create(Reference spitter) {
         if (findOneByUsername(spitter.getUsername()) != null) {
-            throw new DuplicateSpittleException();
+            throw new DuplicateReferenceException();
         }
         spitter.setId((long) spitters.size());
         spitters.add(spitter);
@@ -28,18 +28,18 @@ public class InMemorySpitterDaoImpl
     }
 
     @Override
-    public boolean delete(Spitter spitter) {
+    public boolean delete(Reference spitter) {
         return false;
     }
 
     @Override
-    public int update(Spitter spitter) {
+    public int update(Reference spitter) {
         return 0;
     }
 
     @Override
-    public Spitter findOneByUsername(String username) {
-        Spitter spitterByName = null;
+    public Reference findOneByUsername(String username) {
+        Reference spitterByName = null;
         try {
             spitterByName = spitters.stream()
                     .filter(spitter -> spitter.getUsername().equals(username))
@@ -53,12 +53,12 @@ public class InMemorySpitterDaoImpl
     }
 
     @Override
-    public Spitter findById(Long id) {
+    public Reference findById(Long id) {
         return null;
     }
 
     @Override
-    public List<Spitter> findAll() {
+    public List<Reference> findAll() {
         return null;
     }
 }

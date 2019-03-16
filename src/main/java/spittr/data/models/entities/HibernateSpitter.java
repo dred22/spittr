@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import spittr.common.LocalDateAttributeConverter;
 
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,26 +15,35 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "SPITTERS")
+@Table(name = "REFERENCE")
 public class HibernateSpitter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID")
     private Long id;
 
+    @Column(name="USERNAME")
     private String username;
 
+    @Column(name="PASSWORD")
     private String password;
 
+    @Column(name="FIRSTNAME")
     private String firstName;
 
+    @Column(name="LASTNAME")
     private String lastName;
 
+    @Column(name="EMAIL")
     private String email;
 
     @Convert(converter = LocalDateAttributeConverter.class)
+    @Column(name="TS")
     private LocalDate ts;
 
+    @Column(name="DELETED")
+    private boolean isDeleted;
 
     public Long getId() {
         return id;
@@ -89,6 +99,14 @@ public class HibernateSpitter {
 
     public void setTs(LocalDate ts) {
         this.ts = ts;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     @Override

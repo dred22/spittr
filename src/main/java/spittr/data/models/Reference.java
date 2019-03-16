@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-public class Spitter {
+public class Reference {
     private Long id;
     @NotNull
     @Size(min = 5, max = 16, message = "{username.size}")
@@ -29,16 +29,16 @@ public class Spitter {
 
     private LocalDate ts;
 
-    public Spitter() {
+    public Reference() {
 
     }
 
-    public Spitter(String username, LocalDate ts) {
+    public Reference(String username, LocalDate ts) {
         this.username = username;
         this.ts = ts;
     }
 
-    public Spitter(Long id, String username, String password, String firstName, String lastName) {
+    public Reference(Long id, String username, String password, String firstName, String lastName) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -46,7 +46,7 @@ public class Spitter {
         this.lastName = lastName;
     }
 
-    public Spitter(String username, String password, String firstName, String lastName) {
+    public Reference(String username, String password, String firstName, String lastName) {
         this(null, username, password, firstName, lastName);
     }
 
@@ -118,7 +118,7 @@ public class Spitter {
 
     @Override
     public String toString() {
-        return "Spitter{" +
+        return "Reference{" +
                "id=" + id +
                ", username='" + username + '\'' +
                ", firstName='" + firstName + '\'' +

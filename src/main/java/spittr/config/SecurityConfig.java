@@ -28,7 +28,7 @@ public class SecurityConfig
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.userDetailsService((username) -> {
-            Spitter spitter = spitterRepository.findByUsername(username);
+            Reference spitter = spitterRepository.findByUsername(username);
             if (spitter != null) {
                 List<GrantedAuthority> authorities = new ArrayList<>();
                 authorities.add(new SimpleGrantedAuthority("ROLE_SPITTER"));
@@ -61,7 +61,7 @@ public class SecurityConfig
             throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/spitters").permitAll()
+                .antMatchers("/", "/references").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin();
     }

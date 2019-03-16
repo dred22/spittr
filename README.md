@@ -15,3 +15,14 @@ CONTENT
   - Criteria API select example
 - docker app and database containers
 - spring 4 mvc and security
+
+
+
+TODO
+ - delitte un nessesaries exceptions, controllers
+ - fix unit test
+ - to add login and logout pages
+ - rename spitter to record
+ - to add a web service (get records)
+ - to add an agulare client for web service
+ - to add an swing client for web service

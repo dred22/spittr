@@ -10,7 +10,7 @@
     </head>
     <body>
         <h1><s:message code="spittr.welcome" /></h1>
-        <a href="<c:url value="/spitters" />">Spitters</a> |
+        <a href="<c:url value="/references" />">References</a> |
         <a href="<c:url value="/spitter/register" />">Register</a>
     </body>
     <footer>
