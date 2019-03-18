@@ -22,54 +22,48 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-public class SpitterController {
+public class ReferenceController {
 
-    private ReferencesService spitterRepository;
+    private ReferencesService referencesService;
 
     @Autowired
-    SpitterController(ReferencesService spitterRepository) {
-        this.spitterRepository = spitterRepository;
+    ReferenceController(ReferencesService referencesService) {
+        this.referencesService = referencesService;
     }
 
-    @RequestMapping(value = "/spitter/register", method = GET)
+    @RequestMapping(value = "/reference/register", method = GET)
     public String showRegistrationForm(Model model) {
         model.addAttribute(new Reference());
         return "registerForm";
     }
 
-    @RequestMapping(value = "/spitter/register", method = POST)
-    public String processRegistration(@Valid Reference spitter, /*@RequestPart(value="profilePicture", required=false) MultipartFile profilePicture,*/ Errors errors, Model model) {
+    @RequestMapping(value = "/reference/register", method = POST)
+    public String processRegistration(@Valid Reference reference, Errors errors, Model model) {
         if (errors.hasErrors()) {
             return "registerForm";
         }
-        Reference spitter1 = new Reference();
-        spitter1.setFirstName("Magomed");
-        spitter1.setLastName("Kadiev");
-        Object[] test = {1, "test", 2, 1, spitter1};
-        Reference savedSpitter = spitterRepository.save(spitter);
-        model.addAttribute("username", spitter.getUsername());
-        model.addAttribute("spitterId", test);
-        /*model.addAttribute("myarray", test);*/
-        return "redirect:/spitter/{username}";
+        Reference savedReference = referencesService.save(reference);
+        model.addAttribute("username", reference.getUsername());
+        return "redirect:/reference/{username}";
     }
 
-    @RequestMapping(value = "/spitter/{username}", method = GET)
-    public String showSpitterProfile(
+    @RequestMapping(value = "/reference/{username}", method = GET)
+    public String showreferenceProfile(
             @PathVariable String username, Model model) {
-        Reference spitter = spitterRepository.findByUsername(username);
-        if (spitter == null) {
+        Reference reference = referencesService.findByUsername(username);
+        if (reference == null) {
             throw new ReferenceNotFoundException();
         }
-        model.addAttribute(spitter);
+        model.addAttribute(reference);
         return "profile";
     }
 
 
-    @RequestMapping(value = "/spitter/me", method = RequestMethod.GET)
+    @RequestMapping(value = "/reference/me", method = RequestMethod.GET)
     public String whoAmI(Model model, Principal principal) {
 
         String username = principal.getName();
-        model.addAttribute(spitterRepository.findByUsername(username));
+        model.addAttribute(referencesService.findByUsername(username));
         return "profile";
     }
 
@@ -78,18 +72,18 @@ public class SpitterController {
     public List<Reference> spittles(Model model,
                                     @RequestParam(value = "max", defaultValue = "9223372036854775807") long max,
                                     @RequestParam(value = "count", defaultValue = "20") int count) {
-        List<Reference> references = spitterRepository.findReferences(max, count);
+        List<Reference> references = referencesService.findReferences(max, count);
         if (CollectionUtils.isEmpty(references)) {
             throw new ReferencesNotFoundException();
         }
         //when instead of view name a value is returned, Spring looks for a view with the same name,
-        // and if it's a case the model data value name will be composed of his type(s), in this case, it'll be 'spitterList'
+        // and if it's a case the model data value name will be composed of his type(s), in this case, it'll be 'referenceList'
         return references;
     }
 
-    @RequestMapping(value = "/spitters/{spittleId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/references/{spittleId}", method = RequestMethod.GET)
     public String spittle(@PathVariable("spittleId") long spittleId, Model model) {
-        Reference reference = spitterRepository.findOne(spittleId);
+        Reference reference = referencesService.findOne(spittleId);
         if (reference == null) {
             throw new ReferenceNotFoundException();
         }

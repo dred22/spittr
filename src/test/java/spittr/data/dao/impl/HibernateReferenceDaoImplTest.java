@@ -8,9 +8,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import spittr.common.SpitterProfiles;
+import spittr.common.HandbookProfiles;
 import spittr.config.RootConfig;
-import spittr.data.dao.SpitterDao;
+import spittr.data.dao.ReferenceDao;
 import spittr.data.models.Reference;
 
 import javax.transaction.Transactional;
@@ -18,25 +18,25 @@ import java.time.LocalDate;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {RootConfig.class})
-@ActiveProfiles(SpitterProfiles.HIBERNATE)
+@ActiveProfiles(HandbookProfiles.HIBERNATE)
 @Transactional
 @TestPropertySource(locations = "classpath:test.properties")
-public class HibernateSpitterDaoImplTest {
+public class HibernateReferenceDaoImplTest {
 
     @Autowired
-    private SpitterDao spitterDao;
+    private ReferenceDao referenceDao;
 
     @Test
     public void create_and_find_by_id() {
-        Reference spitter = new Reference("Dres", LocalDate.now());
-        Reference spitterSaved = spitterDao.create(spitter);
-        Assert.assertNotNull(spitterSaved);
-        Long savedId = spitterSaved.getId();
+        Reference reference = new Reference("Dres", LocalDate.now());
+        Reference referenceSaved = referenceDao.create(reference);
+        Assert.assertNotNull(referenceSaved);
+        Long savedId = referenceSaved.getId();
         Assert.assertNotNull(savedId);
 
-        Reference spitterDres = spitterDao.findById(savedId);
-        Assert.assertNotNull(spitterDres);
-        Assert.assertNotNull(spitterDres.getId());
+        Reference referenceDres = referenceDao.findById(savedId);
+        Assert.assertNotNull(referenceDres);
+        Assert.assertNotNull(referenceDres.getId());
     }
 
 }

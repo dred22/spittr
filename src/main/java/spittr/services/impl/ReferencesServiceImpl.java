@@ -3,7 +3,7 @@ package spittr.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import spittr.data.dao.SpitterDao;
+import spittr.data.dao.ReferenceDao;
 import spittr.data.models.Reference;
 import spittr.services.ReferencesService;
 
@@ -16,25 +16,25 @@ public class ReferencesServiceImpl
         implements ReferencesService {
 
     @Autowired
-    private SpitterDao spitterDao;
+    private ReferenceDao referenceDao;
 
     private Map<String, String> mapUserAndPassword;
 
     @Override
     public Reference save(Reference reference) {
-        return spitterDao.create(reference);
+        return referenceDao.create(reference);
     }
 
     @Override
     public Reference findByUsername(String reference) {
-        Reference oneByName = spitterDao.findOneByUsername(reference);
+        Reference oneByName = referenceDao.findOneByUsername(reference);
         return oneByName;
     }
 
     @Override
     public List<Reference> findReferences(long max, int count) {
         //return Arrays.asList(new Reference("Maga", LocalDate.now()), new Reference("Istre", LocalDate.now()));
-        return spitterDao.findAll();
+        return referenceDao.findAll();
     }
 
     @Override

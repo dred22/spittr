@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
-public class SpitterControllerUnitTest {
+public class ReferenceControllerUnitTest {
 
     @Test
     public void shouldProcessRegistration()
@@ -23,15 +23,15 @@ public class SpitterControllerUnitTest {
 
         Mockito.when(mockRepository.save(unsaved)).thenReturn(saved);
 
-        SpitterController controller = new SpitterController(mockRepository);
+        ReferenceController controller = new ReferenceController(mockRepository);
         MockMvc mockMvc = standaloneSetup(controller).build();
 
-        mockMvc.perform(post("/spitter/register")
+        mockMvc.perform(post("/reference/register")
                                 .param("firstName", "Jack")
                                 .param("lastName", "Bauer")
                                 .param("username", "jbauer")
                                 .param("password", "24hours"))
-                .andExpect(redirectedUrl("/spitter/jbauer"));
+                .andExpect(redirectedUrl("/reference/jbauer"));
         Mockito.verify(mockRepository, Mockito.atLeastOnce()).save(unsaved);
 
     }
@@ -39,9 +39,9 @@ public class SpitterControllerUnitTest {
     @Test
     public void shouldShowRegistration()
             throws Exception {
-        SpitterController controller = new SpitterController(null);
+        ReferenceController controller = new ReferenceController(null);
         MockMvc mockMvc = standaloneSetup(controller).build();
-        mockMvc.perform(get("/spitter/register"))
+        mockMvc.perform(get("/reference/register"))
                 .andExpect(view().name("registerForm"));
     }
 

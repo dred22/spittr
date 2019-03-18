@@ -2,8 +2,8 @@ package spittr.data.dao.impl;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
-import spittr.common.SpitterProfiles;
-import spittr.data.dao.SpitterDao;
+import spittr.common.HandbookProfiles;
+import spittr.data.dao.ReferenceDao;
 import spittr.data.models.Reference;
 import spittr.exeptions.DuplicateReferenceException;
 
@@ -11,45 +11,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-@Profile(SpitterProfiles.IN_MEMORY)
-public class InMemorySpitterDaoImpl
-        implements SpitterDao {
+@Profile(HandbookProfiles.IN_MEMORY)
+public class InMemoryReferenceDaoImpl
+        implements ReferenceDao {
 
-    private List<Reference> spitters = new ArrayList<>();
+    private List<Reference> references = new ArrayList<>();
 
     @Override
-    public Reference create(Reference spitter) {
-        if (findOneByUsername(spitter.getUsername()) != null) {
+    public Reference create(Reference reference) {
+        if (findOneByUsername(reference.getUsername()) != null) {
             throw new DuplicateReferenceException();
         }
-        spitter.setId((long) spitters.size());
-        spitters.add(spitter);
-        return spitter;
+        reference.setId((long) references.size());
+        references.add(reference);
+        return reference;
     }
 
     @Override
-    public boolean delete(Reference spitter) {
+    public boolean delete(Reference reference) {
         return false;
     }
 
     @Override
-    public int update(Reference spitter) {
+    public int update(Reference reference) {
         return 0;
     }
 
     @Override
     public Reference findOneByUsername(String username) {
-        Reference spitterByName = null;
+        Reference referenceByName = null;
         try {
-            spitterByName = spitters.stream()
-                    .filter(spitter -> spitter.getUsername().equals(username))
+            referenceByName = references.stream()
+                    .filter(reference -> reference.getUsername().equals(username))
                     .findFirst().get();
         }
         catch (Exception e) {
             System.out.println("There is an exception " + e.getMessage());
         }
 
-        return spitterByName;
+        return referenceByName;
     }
 
     @Override

@@ -11,7 +11,7 @@
     <body>
         <h1><s:message code="spittr.welcome" /></h1>
         <a href="<c:url value="/references" />">References</a> |
-        <a href="<c:url value="/spitter/register" />">Register</a>
+        <a href="<c:url value="/reference/register" />">Register</a>
     </body>
     <footer>
       <p>The profile is <strong>${profiles[0]}<strong></p>

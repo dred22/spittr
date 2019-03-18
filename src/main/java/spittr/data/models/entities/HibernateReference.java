@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "REFERENCE")
-public class HibernateSpitter {
+public class HibernateReference {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -121,7 +121,7 @@ public class HibernateSpitter {
 
     @Override
     public String toString() {
-        return "HibernateSpitter{" +
+        return "HibernateReference{" +
                "id=" + id +
                ", username='" + username + '\'' +
                ", firstName='" + firstName + '\'' +

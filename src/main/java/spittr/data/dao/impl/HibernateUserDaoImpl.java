@@ -20,17 +20,17 @@ public class HibernateUserDaoImpl
     private EntityManager entityManager;
 
     @Override
-    public HibernateUser create(HibernateUser user) {
+    public HibernateUser create(HibernateUser reference) {
         return null;
     }
 
     @Override
-    public boolean delete(HibernateUser user) {
+    public boolean delete(HibernateUser reference) {
         return false;
     }
 
     @Override
-    public int update(HibernateUser user) {
+    public int update(HibernateUser reference) {
         return 0;
     }
 

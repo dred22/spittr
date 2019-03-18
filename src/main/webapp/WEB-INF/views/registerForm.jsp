@@ -23,7 +23,7 @@
     <h1>Register</h1>
     <h2>Hello <security:authentication property="principal.username" />!</h2>
     <!-- enctype="multipart/form-data" -->
-    <sf:form method="POST" commandName="spitter" >
+    <sf:form method="POST" commandName="reference" >
     <sf:errors path="*" element="div" cssClass="errors" />
         <sf:label path="firstName" cssErrorClass="error">First Name</sf:label>: <sf:input path="firstName" /><br/>
         <sf:label path="lastName" cssErrorClass="error">Last Name</sf:label>: <sf:input path="lastName" /><br/>
