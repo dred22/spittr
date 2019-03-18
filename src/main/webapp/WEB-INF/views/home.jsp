@@ -3,13 +3,13 @@
 <%@ page session="false" %>
 <html>
     <head>
-        <title>Spittr</title>
+        <title>Reference</title>
         <link rel="stylesheet"
         type="text/css"
         href="<c:url value="/resources/style.css" />" >
     </head>
     <body>
-        <h1><s:message code="spittr.welcome" /></h1>
+        <h1><s:message code="reference.welcome" /></h1>
         <a href="<c:url value="/references" />">References</a> |
         <a href="<c:url value="/reference/register" />">Register</a>
     </body>

@@ -13,7 +13,7 @@
 <!--    <Logger name="org.hibernate" level="info" additivity="true">
       <appender-ref ref="console" />
     </Logger>-->
-    <Logger name="spittr" level="debug" additivity="false">
+    <Logger name="reference" level="debug" additivity="false">
       <appender-ref ref="console" />
     </Logger>
     <Root level="info" additivity="false">
