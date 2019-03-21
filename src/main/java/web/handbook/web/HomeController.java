@@ -19,7 +19,7 @@ public class HomeController {
     @RequestMapping(method = GET)
     public String home(Model model) {
         model.addAttribute("profiles", environment.getActiveProfiles());
-        return "home";
+        return "index";
 
     }
 
