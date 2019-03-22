@@ -18,18 +18,19 @@
 
 							<div class="panel-heading"><spring:message code="authentication"/></div>
 							<div class="panel-body">
-								<form:form method="post" modelAttribute="user">
+								<form name='f' th:action='@{/login}' method='POST'>
 									<div class="form-group">
 										<label for="username"><spring:message code="authentication.username"/></label>
-										<form:input path="userName" class="form-control" />
-										<!-- <input id="firstName" name="firstName" class="form-control" type="text" /> -->
+										<input type='text' name='username' value='' class="form-control"/>
 									</div>
 									<div class="form-group">
 										<label for="password"><spring:message code="authentication.password"/></label>
-										<form:input class="form-control" path="password" />
+										<input type='password' name='password' class="form-control"/>
 									</div>
-									<button type="submit" class="btn btn-default"><spring:message code="authentication.login"/></button>
-								</form:form>
+									<input name="submit" type="submit" value="Login"/>
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+									<!--<button type="submit" class="btn btn-default"><spring:message code="authentication.login"/></button>-->
+								</form>
 								
 							</div>
 

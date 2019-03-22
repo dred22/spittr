@@ -61,9 +61,9 @@ public class SecurityConfig
             throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/references").permitAll()
-                .anyRequest().authenticated()
-                .and().formLogin();
+                .antMatchers("/", "/references", "/public/**").permitAll().anyRequest().authenticated()
+                .and().formLogin().loginPage("/login").permitAll()
+                .and().logout().permitAll();
     }
 
     @Bean

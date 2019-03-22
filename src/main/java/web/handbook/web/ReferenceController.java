@@ -58,16 +58,6 @@ public class ReferenceController {
         return "profile";
     }
 
-
-    @RequestMapping(value = "/reference/me", method = RequestMethod.GET)
-    public String whoAmI(Model model, Principal principal) {
-
-        String username = principal.getName();
-        model.addAttribute(referencesService.findByUsername(username));
-        return "profile";
-    }
-
-
     @RequestMapping(value = "/references", method = RequestMethod.GET)
     public List<Reference> spittles(Model model,
                                     @RequestParam(value = "max", defaultValue = "9223372036854775807") long max,
