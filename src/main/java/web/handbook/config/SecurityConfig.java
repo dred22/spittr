@@ -19,35 +19,8 @@ public class SecurityConfig
         extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    DataSource dataSource;
-    @Autowired
     private UserDetailsService userDetailsService;
 
-    /* in memory authentication
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth.userDetailsService((username) -> {
-            Reference spitter = spitterRepository.findByUsername(username);
-            if (spitter != null) {
-                List<GrantedAuthority> authorities = new ArrayList<>();
-                authorities.add(new SimpleGrantedAuthority("ROLE_SPITTER"));
-
-                return new User(
-                        spitter.getUsername(),
-                        spitter.getPassword(),
-                        authorities);
-            }
-            throw new UsernameNotFoundException("User '" + username + "' not found.");
-        });
-    }*/
-/*    @Override
-    protected void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth
-                .jdbcAuthentication()
-                .dataSource(dataSource).passwordEncoder(passwordEncoder());
-    }*/
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
@@ -61,9 +34,9 @@ public class SecurityConfig
             throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/references", "/public/**").permitAll().anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll();
+                .antMatchers("/", "/references").permitAll().anyRequest().authenticated()
+                .and().formLogin().loginPage("/login")
+                .loginProcessingUrl("/login").permitAll();
     }
 
     @Bean
@@ -71,4 +44,5 @@ public class SecurityConfig
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder;
     }
+
 }
