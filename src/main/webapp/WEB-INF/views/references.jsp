@@ -1,9 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="components/head.jsp"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-
-	<%@ include file="components/side-bar.jsp"%>
+<%@ include file="components/head.jsp" %>
+<%@ include file="components/side-bar.jsp"%>
 
 
 	<!-- Page Content -->

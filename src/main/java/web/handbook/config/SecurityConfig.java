@@ -37,7 +37,9 @@ public class SecurityConfig
                 .authorizeRequests()
                 .antMatchers("/", "/references").permitAll().anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
-                .loginProcessingUrl("/login").permitAll();
+                .loginProcessingUrl("/login").permitAll().and().logout()
+                .logoutSuccessUrl("/")
+                .logoutUrl("/logout");
     }
 
     @Bean

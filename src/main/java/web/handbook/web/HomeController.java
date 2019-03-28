@@ -29,4 +29,9 @@ public class HomeController {
         return "login";
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage() {
+        return "index";
+    }
+
 }
