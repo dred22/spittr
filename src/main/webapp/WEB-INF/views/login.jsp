@@ -12,13 +12,19 @@
 		<div class="container">
 
 			<div class="col-sm-offset-3 col-sm-6">
-				<c:choose>
-					<c:when test="${logined !='ok'}">
-						<div class="panel panel-warning">
+            <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+                  <p>
+                    <font color="red">
+                      Incorrect credentials <br/>
+                      <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
+                    </font>
+                  </p>
+            </c:if>
 
+						<div class="panel panel-warning">
 							<div class="panel-heading"><spring:message code="authentication"/></div>
 							<div class="panel-body">
-								<form name='f' th:action='@{/login}' method='POST'>
+								<form name='f' method='POST'>
 									<div class="form-group">
 										<label for="username"><spring:message code="authentication.username"/></label>
 										<input type='text' name='username' value='' class="form-control"/>
@@ -31,15 +37,9 @@
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 									<!--<button type="submit" class="btn btn-default"><spring:message code="authentication.login"/></button>-->
 								</form>
-								
-							</div>
 
+							</div>
 						</div>
-					</c:when>
-					<c:otherwise>
-				<div class="alert alert-success text-center" role="alert"><spring:message code="authentication.logined.message"/> </div>
-					</c:otherwise>
-				</c:choose>
 
 			</div>
 
