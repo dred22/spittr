@@ -3,10 +3,16 @@ package web.handbook.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -17,6 +23,9 @@ public class HomeController {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    AuthenticationTrustResolver authenticationTrustResolver;
+
     @RequestMapping(method = GET)
     public String home(Model model) {
         model.addAttribute("profiles", environment.getActiveProfiles());
@@ -24,14 +33,34 @@ public class HomeController {
 
     }
 
+    /**
+     * This method handles login GET requests.
+     * If users is already logged-in and tries to goto login page again, will be redirected to list page.
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
-        return "login";
+        if (isCurrentAuthenticationAnonymous()) {
+            return "login";
+        } else {
+            return "redirect:/";
+        }
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logoutPage() {
-        return "index";
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            SecurityContextHolder.getContext().setAuthentication(null);
+        }
+        return "redirect:/";
+    }
+
+    /**
+     * This method returns true if users is already authenticated [logged-in], else false.
+     */
+    private boolean isCurrentAuthenticationAnonymous() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authenticationTrustResolver.isAnonymous(authentication);
     }
 
 }
