@@ -1,15 +1,14 @@
 <%@ include file="components/head.jsp" %>
 <%@ include file="components/side-bar.jsp"%>
 
-
 	<!-- Page Content -->
 	
 	<div id="page-content-wrapper">
 		<div class="container">
 		
 		
-					<c:choose>
-					<c:when test="${deleted != 'ok'}">	
+      <c:choose>
+      <c:when test="${deleted != 'ok'}">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -40,8 +39,8 @@
 				</c:when>
 					<c:otherwise>
 					<div class="alert alert-success text-center" role="alert"><spring:message code="show-all.reference.message.delete.ok"/></div>
-					</c:otherwise>
-				</c:choose>		
+        </c:otherwise>
+      </c:choose>
 			
 		</div><a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
 	</div>

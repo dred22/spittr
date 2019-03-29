@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +48,4 @@
    	</div>
 	</div>
 </div>
-<c:if test="${empty sessionScope.toggled}">
-	<c:set var="toggled" value="toggled" scope="session"  />
-</c:if>
-<div id="wrapper" class="${toggled}">
+<div id="wrapper">

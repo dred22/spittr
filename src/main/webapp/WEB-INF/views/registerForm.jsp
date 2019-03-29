@@ -1,25 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ page session="false" %>
-<html>
-    <head>
-        <title>Spittr</title>
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />" >
-        <style>
-            div.errors {
-            background-color: #ffcccc;
-            border: 2px solid red;
-            }
-            label.error {
-            color: red;
-            }
-            input.error {
-            background-color: #ffcccc;
-            }
-        </style>
-    </head>
-<body>
+<%@ include file="components/head.jsp" %>
+<%@ include file="components/side-bar.jsp"%>
+
+<div id="page-content-wrapper">
+  <div class="container">
+
     <h1>Register</h1>
     <h2>Hello <security:authentication property="principal.username" />!</h2>
     <!-- enctype="multipart/form-data" -->
@@ -33,5 +17,10 @@
         <!--File to upload: <input type="file" name="profilePicture"><br />-->
         <input type="submit" value="Register" />
     </sf:form>
-</body>
-</html>
+
+	</div><a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+	<!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
+<%@ include file="components/script-block.jsp"%>
+<%@ include file="components/foot.jsp"%>

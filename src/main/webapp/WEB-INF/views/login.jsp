@@ -1,7 +1,5 @@
 <%@ include file="components/head.jsp"%>
-
-<!-- <div id="wrapper"> -->
-	<%@ include file="components/side-bar.jsp"%>
+<%@ include file="components/side-bar.jsp"%>
 
 
 	<!-- Page Content -->
