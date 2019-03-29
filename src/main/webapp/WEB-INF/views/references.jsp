@@ -26,12 +26,16 @@
 						<td>${entity.lastName }</td>
 						<td>${entity.username }</td>
 						<td>
-              <security:authorize access="hasRole('ROLE_USER')">
+              <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
                 ${entity.password }
               </security:authorize>
              </td>
 
-						<td><a href="${pageContext.request.contextPath}/delete?id=${entity.id}" class="btn btn-danger" role="button"><spring:message code="show-all.reference.table.action.delete"/></a></td>
+						<td>
+						 <security:authorize access="hasRole('ROLE_ADMIN')">
+						  <a href="${pageContext.request.contextPath}/delete?id=${entity.id}" class="btn btn-danger" role="button"><spring:message code="show-all.reference.table.action.delete"/></a>
+             </security:authorize>
+						</td>
 					</tr>
 					</c:forEach>
 				</tbody>
