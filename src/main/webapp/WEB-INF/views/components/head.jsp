@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,8 +44,8 @@
 <div class=" navbar-fixed-top ">
    <div class="container">
    <div class="pull-right">   
-   		<a href="${requestScope['javax.servlet.forward.request_uri']}?mylocale=en" class="lang-lg" lang="en"></a>
-   		<a href="${requestScope['javax.servlet.forward.request_uri']}?mylocale=fr" class="lang-lg" lang="fr"></a>
+   		<a href="${requestScope['javax.servlet.forward.request_uri']}?lang=en" class="lang-lg" lang="en"></a>
+   		<a href="${requestScope['javax.servlet.forward.request_uri']}?lang=fr" class="lang-lg" lang="fr"></a>
    	</div>
 	</div>
 </div>

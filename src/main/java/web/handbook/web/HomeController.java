@@ -1,6 +1,8 @@
 package web.handbook.web;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -14,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.Locale;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
+
+    private final static Logger LOG = LogManager.getLogger(HomeController.class);
 
     @Autowired
     private Environment environment;
@@ -27,7 +33,8 @@ public class HomeController {
     AuthenticationTrustResolver authenticationTrustResolver;
 
     @RequestMapping(method = GET)
-    public String home(Model model) {
+    public String home(Locale locale, Model model) {
+        LOG.info("Welcome home! The client locale is {}.", locale);
         model.addAttribute("profiles", environment.getActiveProfiles());
         return "index";
 
