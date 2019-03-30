@@ -1,4 +1,4 @@
-package web.handbook.web;
+package web.handbook.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

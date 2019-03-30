@@ -32,9 +32,19 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<%--     <%@ include file="/text.txt" %>
-    </style>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/text.txt" /> --%>
+
+      <style>
+                div.errors {
+                background-color: #ffcccc;
+                border: 2px solid red;
+                }
+                label.error {
+                color: red;
+                }
+                input.error {
+                background-color: #ffcccc;
+                }
+            </style>
 
 </head>
 

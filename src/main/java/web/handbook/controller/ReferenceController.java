@@ -1,4 +1,4 @@
-package web.handbook.web;
+package web.handbook.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,6 @@ import web.handbook.exeptions.ReferencesNotFoundException;
 import web.handbook.services.ReferencesService;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;

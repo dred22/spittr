@@ -1,4 +1,4 @@
-package web.handbook.web;
+package web.handbook.controller;
 
 import org.junit.Test;
 import org.mockito.Mockito;
