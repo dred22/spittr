@@ -55,7 +55,7 @@ public class ReferenceController {
             throw new ReferenceNotFoundException();
         }
         model.addAttribute(reference);
-        return "profile";
+        return "reference";
     }
 
     @RequestMapping(value = "/references", method = RequestMethod.GET)
@@ -71,13 +71,4 @@ public class ReferenceController {
         return references;
     }
 
-    @RequestMapping(value = "/references/{spittleId}", method = RequestMethod.GET)
-    public String spittle(@PathVariable("spittleId") long spittleId, Model model) {
-        Reference reference = referencesService.findOne(spittleId);
-        if (reference == null) {
-            throw new ReferenceNotFoundException();
-        }
-        model.addAttribute(reference);
-        return "reference";
-    }
 }
