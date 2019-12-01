@@ -25,3 +25,9 @@ TODO
  - to add a web service (get records)
  - to add an agulare client for web service
  - to add an swing client for web service
+
+ ++
+ - add kafka infrastructure
+ - add web services
+ - generate the docker image by GIB
+ - add a bonus java runner which run a docker image
