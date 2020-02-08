@@ -1,3 +1,4 @@
+/*
 package web.handbook.data.dao.impl;
 
 import org.springframework.context.annotation.Profile;
@@ -19,7 +20,7 @@ public class InMemoryReferenceDaoImpl
 
     @Override
     public Reference create(Reference reference) {
-        if (findOneByUsername(reference.getUsername()) != null) {
+        if (findOneByUsername(reference.getUserName()) != null) {
             throw new DuplicateReferenceException();
         }
         reference.setId((long) references.size());
@@ -42,7 +43,7 @@ public class InMemoryReferenceDaoImpl
         Reference referenceByName = null;
         try {
             referenceByName = references.stream()
-                    .filter(reference -> reference.getUsername().equals(username))
+                    .filter(reference -> reference.getUserName().equals(username))
                     .findFirst().get();
         }
         catch (Exception e) {
@@ -62,3 +63,4 @@ public class InMemoryReferenceDaoImpl
         return null;
     }
 }
+*/

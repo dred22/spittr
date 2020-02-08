@@ -12,8 +12,8 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th><spring:message code="show-all.reference.table.firstName"/></th>
-						<th><spring:message code="show-all.reference.table.lastName"/></th>
+						<th><spring:message code="show-all.reference.table.firstname"/></th>
+						<th><spring:message code="show-all.reference.table.lastname"/></th>
 						<th><spring:message code="show-all.reference.table.username"/></th>
 						<th><spring:message code="show-all.reference.table.password"/></th>
 						<th>Action</th>
@@ -24,7 +24,7 @@
 					<tr>
 						<td>${entity.firstName }</td>
 						<td>${entity.lastName }</td>
-						<td>${entity.username }</td>
+						<td>${entity.userName }</td>
 						<td>
               <security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
                 ${entity.password }
@@ -33,7 +33,7 @@
 
 						<td>
 						 <security:authorize access="hasRole('ROLE_ADMIN')">
-						  <a href="${pageContext.request.contextPath}/delete?id=${entity.id}" class="btn btn-danger" role="button"><spring:message code="show-all.reference.table.action.delete"/></a>
+						  <a href="${pageContext.request.contextPath}/delete/${entity.id}" class="btn btn-danger" role="button"><spring:message code="show-all.reference.table.action.delete"/></a>
              </security:authorize>
 						</td>
 					</tr>

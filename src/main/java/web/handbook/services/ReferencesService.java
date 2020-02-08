@@ -12,5 +12,5 @@ public interface ReferencesService {
 
     List<Reference> findReferences(long max, int count);
 
-    Reference findOne(long i);
+    void deleteById(long i);
 }

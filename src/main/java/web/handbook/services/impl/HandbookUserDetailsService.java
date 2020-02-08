@@ -23,7 +23,7 @@ public class HandbookUserDetailsService
     @Override
     public UserDetails loadUserByUsername(String userName)
             throws UsernameNotFoundException {
-        HibernateUser hibernateUser = userDao.findOneByUsername(userName);
+        HibernateUser hibernateUser = userDao.findById(userName).get();
         GrantedAuthority authority = new SimpleGrantedAuthority(hibernateUser.getAuthority());
         UserDetails userDetails = new User(hibernateUser.getUsername(),
                                            hibernateUser.getPassword(), Arrays.asList(authority));

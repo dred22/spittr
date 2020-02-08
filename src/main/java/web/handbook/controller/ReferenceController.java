@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import web.handbook.data.models.Reference;
 import web.handbook.exeptions.ReferenceNotFoundException;
 import web.handbook.exeptions.ReferencesNotFoundException;
@@ -36,13 +37,19 @@ public class ReferenceController {
         return "registerForm";
     }
 
+    @RequestMapping(value = "/delete/{id}", method = GET)
+    public String deleteReference(@PathVariable Long id) {
+        referencesService.deleteById(id);
+        return "redirect:/references";
+    }
+
     @RequestMapping(value = "/reference/register", method = POST)
-    public String processRegistration(@Valid Reference reference, Errors errors, Model model) {
+    public String processRegistration(@Valid Reference reference, Errors errors, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             return "registerForm";
         }
         Reference savedReference = referencesService.save(reference);
-        model.addAttribute("username", reference.getUsername());
+        redirectAttributes.addAttribute("username", reference.getUserName());
         return "redirect:/reference/{username}";
     }
 

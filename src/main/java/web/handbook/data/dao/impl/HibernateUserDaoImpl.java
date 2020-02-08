@@ -1,3 +1,4 @@
+/*
 package web.handbook.data.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
@@ -52,3 +53,4 @@ public class HibernateUserDaoImpl
         return null;
     }
 }
+*/

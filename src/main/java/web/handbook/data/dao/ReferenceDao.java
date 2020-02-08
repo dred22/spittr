@@ -1,7 +1,9 @@
 package web.handbook.data.dao;
 
-import web.handbook.data.models.Reference;
+import org.springframework.data.repository.CrudRepository;
+import web.handbook.data.models.entities.HibernateReference;
 
 public interface ReferenceDao
-        extends GenericDao<Reference> {
+        extends CrudRepository<HibernateReference, Long> {
+    HibernateReference findOneByUserName(String userName);
 }
