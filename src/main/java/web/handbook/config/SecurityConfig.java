@@ -63,7 +63,7 @@ public class SecurityConfig
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/public/**");
+                .antMatchers("/public/**", "/api/**");
     }
 
     @Bean
